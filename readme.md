@@ -799,7 +799,7 @@ sudo systemctl enable fail2ban
 
 ## 📝 Notes
 
-- Replace `niteshpawar97` with your actual GitHub username
+- Replace `username` with your actual GitHub username
 - Update `your-server-ip` with your actual VPS IP address
 - Ensure proper file permissions for SSH keys (600)
 - Test SSH connections before proceeding with deployment
