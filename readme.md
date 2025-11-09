@@ -207,8 +207,8 @@ git@github-project:username/repo.git
 
 **Example:**
 ```bash
-git clone git@github-project:niteshpawar97/your-project-backend.git
-git clone git@github-project-admin:niteshpawar97/your-project-frontend.git
+git clone git@github-project:username/your-project-backend.git
+git clone git@github-project-admin:username/your-project-frontend.git
 ```
 
 ### Step 6: Test SSH Connection
@@ -242,12 +242,12 @@ sudo npm install -g pm2 --unsafe-perm=true
 
 ### Clone Backend Repository
 ```bash
-git clone git@github-project:niteshpawar97/your-project-backend.git
+git clone git@github-project:username/your-project-backend.git
 ```
 
 ### Clone Frontend Admin Panel
 ```bash
-git clone git@github-project-admin:niteshpawar97/your-project-frontend.git
+git clone git@github-project-admin:username/your-project-frontend.git
 ```
 
 ---
@@ -601,8 +601,8 @@ module.exports = {
 | Repository | SSH Host | Key File | Git Clone Command |
 |------------|----------|----------|-------------------|
 | Default Repo | `github.com` | `~/.ssh/id_rsa` | `git@github.com:user/repo.git` |
-| Your Project Backend | `github-project` | `~/.ssh/id_ed25519` | `git@github-project:niteshpawar97/your-project-backend.git` |
-| Your Project Frontend | `github-project-admin` | `~/.ssh/id_ed25519` | `git@github-project-admin:niteshpawar97/your-project-frontend.git` |
+| Your Project Backend | `github-project` | `~/.ssh/id_ed25519` | `git@github-project:username/your-project-backend.git` |
+| Your Project Frontend | `github-project-admin` | `~/.ssh/id_ed25519` | `git@github-project-admin:username/your-project-frontend.git` |
 
 ---
 
@@ -820,5 +820,3 @@ sudo systemctl enable fail2ban
 **[⭐ Star](https://github.com/niteshpawar97/GitHub-CICD-VPS-Setup-Guide) • [🍴 Fork](https://github.com/niteshpawar97/GitHub-CICD-VPS-Setup-Guide/fork) • [🐛 Report Bug](https://github.com/niteshpawar97/GitHub-CICD-VPS-Setup-Guide/issues) • [💡 Request Feature](https://github.com/niteshpawar97/GitHub-CICD-VPS-Setup-Guide/issues)**
 
 </div>
-#   G i t H u b - C I C D - V P S - S e t u p - G u i d e  
- 
