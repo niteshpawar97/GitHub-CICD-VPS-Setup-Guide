@@ -84,7 +84,70 @@ systemctl restart ssh
 ```bash
 ssh username@your-server-ip
 ```
+If you see errors when testing login, follow these safe troubleshooting steps to locate and fix any configuration that
+forces PasswordAuthentication to `no`. Cloud images and some distro packages may write drop-in files under
+`/etc/ssh/sshd_config.d/` which override the main `/etc/ssh/sshd_config` settings.
 
+IMPORTANT: Editing SSH configuration can lock you out. Keep an active SSH session or console access while testing and
+create a backup of any file before editing it.
+
+1) Find files that mention PasswordAuthentication:
+
+```bash
+sudo grep -R "PasswordAuthentication" /etc/ssh/sshd_config.d/ /etc/ssh/sshd_config || true
+```
+
+Example output:
+
+```
+/etc/ssh/sshd_config.d/60-cloudimg-settings.conf:PasswordAuthentication no
+```
+
+2) Back up and edit the file that sets it to `no` (replace the path below with the file you discovered):
+
+```bash
+sudo cp /etc/ssh/sshd_config.d/60-cloudimg-settings.conf \
+  /etc/ssh/sshd_config.d/60-cloudimg-settings.conf.bak
+sudo nano /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+# change the line:
+# PasswordAuthentication no
+# to:
+# PasswordAuthentication yes
+```
+
+3) Reload the SSH daemon (some distros use `sshd`, others use `ssh`):
+
+```bash
+sudo systemctl restart sshd || sudo systemctl restart ssh
+sudo systemctl status sshd --no-pager || sudo systemctl status ssh --no-pager
+```
+
+4) Verify the effective SSH configuration:
+
+```bash
+sudo sshd -T | grep -E "permitrootlogin|passwordauthentication"
+# Example expected lines:
+# permitrootlogin yes
+# passwordauthentication yes
+```
+
+5) From a separate terminal, test login (do NOT close your current session until login succeeds):
+
+```bash
+ssh username@your-server-ip
+```
+
+Security note: Enabling `PermitRootLogin yes` and `PasswordAuthentication yes` weakens server security. Prefer SSH keys
+for access. If you temporarily enable password login for troubleshooting, revert to stricter settings afterwards (for
+example `PermitRootLogin prohibit-password`) and remove the temporary override file.
+
+To revert quickly, restore the backup and restart the SSH service:
+
+```bash
+sudo cp /etc/ssh/sshd_config.d/60-cloudimg-settings.conf.bak \
+  /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+sudo systemctl restart sshd || sudo systemctl restart ssh
+```
 ---
 
 ## 3. SSH Key Generation
